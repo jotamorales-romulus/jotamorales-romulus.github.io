@@ -29,6 +29,13 @@
       letter-spacing: 2px;
       margin-top: 8px;
     }
+    .aviso {
+      color: #e6c200;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 40px;
+    }
     .seccion {
       margin-top: 48px;
       font-size: 0.95rem;
@@ -38,6 +45,47 @@
       border: none;
       border-top: 1px solid #2a2a2a;
       margin: 40px 0;
+    }
+    .menu {
+      margin-top: 48px;
+    }
+    .menu-item {
+      border-top: 1px solid #2a2a2a;
+    }
+    .menu-titulo {
+      color: #e6c200;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 1rem;
+      padding: 18px 0;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: color 0.2s;
+    }
+    .menu-titulo:hover {
+      color: #ffeb00;
+    }
+    .flecha {
+      display: inline-block;
+      transition: transform 0.2s;
+      font-size: 0.7rem;
+    }
+    .menu-item.abierto .flecha {
+      transform: rotate(90deg);
+    }
+    .menu-contenido {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      color: #b0b0b0;
+      font-size: 0.9rem;
+    }
+    .menu-item.abierto .menu-contenido {
+      max-height: 500px;
+      padding-bottom: 18px;
     }
     .enlaces {
       margin-top: 48px;
@@ -56,6 +104,8 @@
   </style>
 </head>
 <body>
+  <p class="aviso">▸ Sitio en construcción</p>
+
   <h1>Jose Joaquín Morales</h1>
   <p class="subtitulo">Diseño industrial · Modelado · Audiovisual</p>
 
@@ -67,8 +117,39 @@
     Hago cosas experimentales.
   </div>
 
+  <div class="menu">
+    <div class="menu-item">
+      <div class="menu-titulo"><span class="flecha">▸</span> Proyectos</div>
+      <div class="menu-contenido">Aquí irán mis proyectos.</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-titulo"><span class="flecha">▸</span> Diseños</div>
+      <div class="menu-contenido">Aquí irán mis diseños.</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-titulo"><span class="flecha">▸</span> Videos</div>
+      <div class="menu-contenido">Aquí irán mis videos.</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-titulo"><span class="flecha">▸</span> Cosplay</div>
+      <div class="menu-contenido">Aquí irá mi cosplay.</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-titulo"><span class="flecha">▸</span> Otros</div>
+      <div class="menu-contenido">Otras cosas.</div>
+    </div>
+  </div>
+
   <div class="enlaces">
     <a href="https://youtube.com/@jothric" target="_blank">▸ YouTube</a>
   </div>
+
+  <script>
+    document.querySelectorAll('.menu-titulo').forEach(function (titulo) {
+      titulo.addEventListener('click', function () {
+        titulo.parentElement.classList.toggle('abierto');
+      });
+    });
+  </script>
 </body>
 </html>
