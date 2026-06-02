@@ -47,9 +47,14 @@
       color: #ff2a2a;
       text-transform: uppercase;
       line-height: 1.6;
-      text-shadow: 0 0 8px rgba(255,42,42,0.6);
       margin-bottom: 16px;
+      animation: titlePulse 3s ease-in-out infinite;
     }
+    @keyframes titlePulse {
+      0%, 100% { text-shadow: 0 0 8px rgba(255,42,42,0.5); }
+      50%      { text-shadow: 0 0 16px rgba(255,42,42,0.9), 0 0 24px rgba(255,42,42,0.4); }
+    }
+
     .subtitulo {
       color: #ff6a6a;
       text-transform: uppercase;
@@ -64,8 +69,13 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 40px;
-      text-shadow: 0 0 6px rgba(230,194,0,0.5);
+      animation: avisoPulse 2s ease-in-out infinite;
     }
+    @keyframes avisoPulse {
+      0%, 100% { text-shadow: 0 0 6px rgba(230,194,0,0.4); opacity: 0.85; }
+      50%      { text-shadow: 0 0 12px rgba(230,194,0,0.8); opacity: 1; }
+    }
+
     .linea {
       border: none;
       border-top: 2px solid #ff2a2a;
@@ -79,7 +89,9 @@
     }
 
     .menu { margin-top: 48px; }
+
     .menu-titulo {
+      position: relative;
       background: #ff2a2a;
       color: #000;
       text-transform: uppercase;
@@ -92,17 +104,49 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      transition: background 0.15s;
+      overflow: hidden;
+      transition: background 0.15s, box-shadow 0.2s;
     }
     .menu-titulo:hover {
       background: #ff5a5a;
+      box-shadow: 0 0 12px rgba(255,42,42,0.7), 0 0 24px rgba(255,42,42,0.3);
     }
+
+    .menu-titulo::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+    }
+    .menu-titulo:hover::before {
+      animation: scan 0.6s ease;
+    }
+    @keyframes scan {
+      0%   { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .menu-label { position: relative; }
+    .menu-titulo:hover .menu-label {
+      animation: glitch 0.3s steps(2) 1;
+    }
+    @keyframes glitch {
+      0%   { transform: translate(0,0);   clip-path: inset(0 0 0 0); }
+      20%  { transform: translate(-2px,1px); clip-path: inset(0 0 60% 0); }
+      40%  { transform: translate(2px,-1px); clip-path: inset(50% 0 0 0); }
+      60%  { transform: translate(-1px,0);  clip-path: inset(0 0 30% 0); }
+      80%  { transform: translate(1px,1px); clip-path: inset(20% 0 0 0); }
+      100% { transform: translate(0,0);   clip-path: inset(0 0 0 0); }
+    }
+
     .flecha {
       display: inline-block;
       transition: transform 0.2s;
       font-size: 1rem;
     }
     .menu-item.abierto .flecha { transform: rotate(90deg); }
+
     .menu-contenido {
       max-height: 0;
       overflow: hidden;
@@ -116,6 +160,11 @@
       max-height: 500px;
       padding-top: 8px;
       padding-bottom: 12px;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .enlaces { margin-top: 48px; }
@@ -150,23 +199,23 @@
 
   <div class="menu">
     <div class="menu-item">
-      <div class="menu-titulo"><span class="flecha">▸</span> Proyectos</div>
+      <div class="menu-titulo"><span class="flecha">▸</span><span class="menu-label">Proyectos</span></div>
       <div class="menu-contenido">Aquí irán mis proyectos.</div>
     </div>
     <div class="menu-item">
-      <div class="menu-titulo"><span class="flecha">▸</span> Diseños</div>
+      <div class="menu-titulo"><span class="flecha">▸</span><span class="menu-label">Diseños</span></div>
       <div class="menu-contenido">Aquí irán mis diseños.</div>
     </div>
     <div class="menu-item">
-      <div class="menu-titulo"><span class="flecha">▸</span> Videos</div>
+      <div class="menu-titulo"><span class="flecha">▸</span><span class="menu-label">Videos</span></div>
       <div class="menu-contenido">Aquí irán mis videos.</div>
     </div>
     <div class="menu-item">
-      <div class="menu-titulo"><span class="flecha">▸</span> Cosplay</div>
+      <div class="menu-titulo"><span class="flecha">▸</span><span class="menu-label">Cosplay</span></div>
       <div class="menu-contenido">Aquí irá mi cosplay.</div>
     </div>
     <div class="menu-item">
-      <div class="menu-titulo"><span class="flecha">▸</span> Otros</div>
+      <div class="menu-titulo"><span class="flecha">▸</span><span class="menu-label">Otros</span></div>
       <div class="menu-contenido">Otras cosas.</div>
     </div>
   </div>
